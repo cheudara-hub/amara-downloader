@@ -1,0 +1,53 @@
+name: Publish an existing tested AMARA build
+on:
+  workflow_dispatch:
+    inputs:
+      run_id:
+        description: Successful main-branch Windows release workflow run ID
+        required: true
+permissions:
+  contents: write
+  actions: read
+jobs:
+  publish:
+    runs-on: windows-latest
+    timeout-minutes: 15
+    env:
+      GH_TOKEN: ${{ github.token }}
+      AMARA_BUILD_RUN: ${{ inputs.run_id }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Verify build provenance and download artifacts
+        id: build
+        shell: pwsh
+        run: |
+          if ($env:AMARA_BUILD_RUN -notmatch '^\d+$') { throw 'Invalid run ID' }
+          $run = gh api "repos/$env:GITHUB_REPOSITORY/actions/runs/$env:AMARA_BUILD_RUN" | ConvertFrom-Json
+          if ($run.conclusion -ne 'success' -or $run.head_branch -ne 'main' -or $run.path -ne '.github/workflows/release.yml' -or $run.head_repository.full_name -ne $env:GITHUB_REPOSITORY) { throw 'Expected a successful first-party main-branch release build' }
+          gh run download $env:AMARA_BUILD_RUN --repo $env:GITHUB_REPOSITORY --name amara-windows --dir release
+          if ($LASTEXITCODE -ne 0) { throw 'Installer download failed' }
+          gh run download $env:AMARA_BUILD_RUN --repo $env:GITHUB_REPOSITORY --name amara-validation --dir validation
+          if ($LASTEXITCODE -ne 0) { throw 'Validation download failed' }
+          python tools/verify-release.py release validation/validation.json
+          if ($LASTEXITCODE -ne 0) { throw 'Artifact verification failed' }
+          $manifest = Get-Content release/amara-update.json -Raw | ConvertFrom-Json
+          $source = gh api "repos/$env:GITHUB_REPOSITORY/contents/source/package.json?ref=$($run.head_sha)" | ConvertFrom-Json
+          $package = [Text.Encoding]::UTF8.GetString([Convert]::FromBase64String($source.content)) | ConvertFrom-Json
+          if ($package.version -ne $manifest.version) { throw 'Build source version does not match artifact' }
+          "sha=$($run.head_sha)" >> $env:GITHUB_OUTPUT
+          "tag=v$($manifest.version)" >> $env:GITHUB_OUTPUT
+      - name: Publish verified artifacts as a release
+        shell: pwsh
+        env:
+          AMARA_RELEASE_TAG: ${{ steps.build.outputs.tag }}
+          AMARA_RELEASE_SHA: ${{ steps.build.outputs.sha }}
+        run: |
+          gh release create $env:AMARA_RELEASE_TAG --repo $env:GITHUB_REPOSITORY --target $env:AMARA_RELEASE_SHA --title "AMARA $env:AMARA_RELEASE_TAG" --notes-file docs/RELEASE-CURRENT.md --draft
+          if ($LASTEXITCODE -ne 0) { throw 'Release creation failed; existing release was kept' }
+          gh release upload $env:AMARA_RELEASE_TAG release/AMARA-Downloader-Setup-*.exe release/AMARA-Downloader-Setup-*.sha256 release/amara-update.json --repo $env:GITHUB_REPOSITORY
+          if ($LASTEXITCODE -ne 0) { throw 'Asset upload failed; release remains a draft' }
+          gh release edit $env:AMARA_RELEASE_TAG --repo $env:GITHUB_REPOSITORY --draft=false --latest
+          if ($LASTEXITCODE -ne 0) { throw 'Release publication failed' }
