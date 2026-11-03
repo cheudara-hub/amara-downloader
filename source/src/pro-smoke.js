@@ -218,6 +218,15 @@ exports.check = async (win, mediaBrowser, workspace) => {
     assert.equal(await downloadSurface.executeJavaScript('document.documentElement.scrollWidth<=innerWidth'), true);
     await capture('Unified-downloads-compact');
     unified.push('downloads','browser','return to catalog','compact downloads');
+    await run('document.getElementById("amaraUpdates").click()'); await wait(300);
+    assert.equal(win.getBrowserViews().length, 0, 'Updates detach native views before opening the dialog');
+    assert.equal(await run('document.querySelector(".amara-update-dialog").open'), true);
+    assert.ok(await run('document.querySelector("[data-app]").textContent.includes(amaraDesktop.version)'));
+    assert.ok(await run('document.querySelector("[data-upstream]").textContent.includes("5.4")'));
+    assert.equal(await run('document.querySelector("[data-action=app]").hidden'), true, 'No unverified installer is offered');
+    await capture('AMARA-updates');
+    await run('document.querySelector("[data-action=close]").click()');
+    unified.push('Updates dialog, native view detach, version tracks, no unverified release');
     assert.equal(errors.length, 0, errors.join('\n'));
     assert.equal(warnings.includes('MaxListenersExceededWarning'), false, 'Repeated navigation must release window owner listeners');
     fs.writeFileSync(path.join(output, 'checks.json'), JSON.stringify({ success: true, initial, cover: { width: cover.width, fallback: cover.fallback }, poster: { saved: queued.posterSaved, besideEpisodes: path.dirname(queued.posterFile) === queued.directory }, unified, checks: ['Cover rendered', 'Movie poster included with download', 'Home', 'Discover', 'Search', 'Saved list', 'Watch history', 'Episode details', 'Batch range', 'Compact layout', 'Unavailable playback', 'Invalid queue payload', 'Native MP4 download', 'Duplicate prevention'], errors }, null, 2));

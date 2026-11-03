@@ -34,7 +34,7 @@ def compare_archive(archive, source):
             if entry.is_dir() or len(parts) < 2:
                 continue
             relative = PurePosixPath(*parts[1:])
-            if '..' in relative.parts or relative.is_absolute() or '\\' in str(relative):
+            if '..' in relative.parts or relative.is_absolute() or '\\' in str(relative) or ':' in str(relative):
                 raise ValueError('Unexpected archive path')
             name = str(relative)
             if not (name in ['main.js', 'preload.js', 'package.json'] or name.startswith('src/native/')):

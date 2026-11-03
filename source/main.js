@@ -4103,7 +4103,7 @@ ipcMain.handle('open-folder', async (event, taskId) => {
 // ===== 应用内更新：固定官方源，下载和重启均由用户确认 =====
 const amaraUpdateMonitor = require('./src/native/amara-updates').createUpdateMonitor({
   config: require('./update-channel.json'), currentVersion: APP_VERSION, directory: activeUserData,
-  isEnabled: () => !IS_PREVIEW && getCurrentSettings().app_updates_enabled !== false,
+  isEnabled: () => !IS_PREVIEW && !verificationProfile && getCurrentSettings().app_updates_enabled !== false,
   request: async url => {
     const response = await axios.get(url, {
       timeout: 10000, maxRedirects: 5, maxContentLength: 1024 * 1024,
