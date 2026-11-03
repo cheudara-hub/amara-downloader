@@ -24,3 +24,5 @@ https://github.com/jackotom/hongguo-drama/archive/refs/tags/v5.4.zip
 2026-11-03 batch hotfix: shared bounded renewal wait after rejected playback
 identity; playback deadline propagation; offline concurrent cooldown tests.
 Sequential live regression improved from 3/24 to 24/24 successful model requests.
+
+2026-11-03: Enabled cursor pagination for Hongguo in the Browse renderer, with shared top/bottom controls and loading/end-of-list guards. Added renderer and desktop navigation regression checks.

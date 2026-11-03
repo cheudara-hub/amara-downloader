@@ -139,3 +139,7 @@ body { font-family: "Segoe UI", sans-serif; font-size: 14px; background: var(--c
 .browse-card.is-downloaded { box-shadow: 0 0 0 2px #10b981 !important; border-radius: 8px !important; }
 .ep-chip.ep-completed { background: rgba(16, 185, 129, 0.18) !important; border-color: #10b981 !important; color: #10b981 !important; font-weight: 700 !important; }
 .ep-chip .ep-badge { color: #10b981 !important; }
+
+/* Catalog pagination is available above and below cursor-based Hongguo feeds. */
+.browse-pager{flex-wrap:wrap;gap:8px;margin:18px 0}
+.browse-pager .pager-item[aria-label]{width:auto;min-width:105px;padding:8px 14px;white-space:nowrap}

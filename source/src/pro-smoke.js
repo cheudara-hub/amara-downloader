@@ -149,11 +149,34 @@ exports.check = async (win, mediaBrowser, workspace) => {
     const repeated = await run('amaraDesktop.call("queue", { platform:"dramabox",dramaId:"desktop-check",title:"Desktop download verification",episodes:[{id:"1",index:1}] })');
     assert.equal(repeated.count, 0, 'Repeated selection does not duplicate a completed episode');
     win.setSize(1400, 940);
+    const { ipcMain } = require('electron');
+    const browseRequests = [];
+    ipcMain.removeHandler('browse-list');
+    ipcMain.handle('browse-list', (_event, options = {}) => {
+      const page = Number(options.page) || 1;
+      browseRequests.push({ page, category: options.category });
+      return { success: true, page, totalPages: 0, hasMore: page === 1, genres: [],
+        results: [{ series_id: String(7700000000000000000n + BigInt(page)), series_title: 'Hongguo page ' + page, episode_count: 10, cover: '', tags: [] }] };
+    });
     const unified = [];
     for (const [route, expectedPages] of [['hongguo',['Discover','Browse']],['library',['My library','My Library','Player']],['add',['Search & download','Search & Download','Add Downloads']],['settings',['Settings']],['transfers',['Downloads']]]) {
       await run(`amaraDesktop.call('navigate',{route:${JSON.stringify(route)}})`); await wait(350);
       if (route === 'hongguo') {
         const nativeRun = script => workspace.workspaceContents().executeJavaScript(script);
+        const nativeFind = (selector, operation = '') => nativeRun('document.querySelector(' + JSON.stringify(selector) + ')' + operation);
+        const nativeCount = selector => nativeRun('document.querySelectorAll(' + JSON.stringify(selector) + ').length');
+        for (let attempt = 0; attempt < 60 && !(await nativeFind('.browse-pager')); attempt++) await wait(50);
+        assert.equal(await nativeCount('.browse-pager'), 2);
+        assert.equal(await nativeFind('[aria-label="Previous page"]', '.disabled'), true);
+        await nativeFind('[aria-label="Next page"]', '.click()');
+        for (let attempt = 0; attempt < 60 && !(await nativeFind('.browse-pager[data-catalog-page="2"]')); attempt++) await wait(50);
+        assert.ok(browseRequests.some(request => request.page === 2), 'Hongguo next button requests the real second page');
+        assert.equal(await nativeCount('.browse-pager[data-catalog-page="2"]'), 2);
+        assert.equal(await nativeFind('[aria-label="Next page"]', '.disabled'), true);
+        await capture('Hongguo-page-2');
+        await nativeFind('[aria-label="Previous page"]', '.click()');
+        for (let attempt = 0; attempt < 60 && !(await nativeFind('.browse-pager[data-catalog-page="1"]')); attempt++) await wait(50);
+        assert.equal(await nativeCount('.browse-pager[data-catalog-page="1"]'), 2);
         assert.equal(await nativeRun('electronAPI.setAlwaysOnTop(true)'), true);
         assert.equal(await nativeRun('electronAPI.setAlwaysOnTop(false)'), false);
         assert.equal((await nativeRun('electronAPI.setWindowLayout("portrait")')).success, true);

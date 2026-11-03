@@ -18,7 +18,7 @@ echo ===============================================
 echo Build the latest AMARA source into a setup EXE
 echo ===============================================
 echo.
-echo Includes the latest thumbnail loading fix.
+echo Includes Hongguo batch recovery and automatic update checks.
 echo Checking the current version and build tools...
 %AMARA_BUILD_PYTHON% -u "tools\build-windows.py" --check
 set "AMARA_BUILD_RESULT=%ERRORLEVEL%"

@@ -1,9 +1,7 @@
-# AMARA Windows 2.8.10
+# AMARA Windows 2.8.11
 
-- Adds an Updates button with automatic checks on startup and every six hours, an immediate retry, and separate AMARA/upstream version information.
-- Connects tested AMARA releases to `cheudara-hub/amara-downloader`. Upstream binaries no longer appear as installable AMARA updates. Own-channel updates require valid release metadata and installer assets.
-- Adds a scheduled GitHub upstream source checker and a local `Check Hongguo Updates.cmd` source/diff preparation command. Downloaded source is not executed or automatically applied.
-- Windows builds produce SHA-256 and update metadata only after active regression checks pass. Public repository exports exclude private configuration and profiles; release CI restores private build settings from an encrypted secret.
-- Retains the Hongguo batch recovery fix verified with eight desktop episode downloads in 2.8.9.
+Hongguo catalog pages now have **Previous page** and **Next page** controls above and below the results. The App catalog uses cursor pagination and does not provide a total page count; the interface now uses its actual `hasMore` value for Hongguo as well as other providers. Controls disable while loading, at the first page, and at the end of the available feed. Numbered web catalogs retain their existing page limits.
 
-Updates open the verified release page for explicit download/install. Compatibility review is still required before new upstream code becomes an AMARA release.
+Verification: renderer regression checks cover Hongguo cursor navigation, both pager locations, first/last pages, loading, numbered catalogs, and another provider. An isolated desktop test opened page 2 using Next, verified the last-page state, and returned using Previous. A live Hongguo check returned 76 titles on page 1 and 77 new titles on page 2. Availability and page contents can change upstream.
+
+Existing download recovery, licensing, and automatic update checks are retained.

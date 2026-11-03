@@ -28,7 +28,7 @@ for name in allowed_roots:
 files += [ROOT / 'tools' / name for name in allowed_tools]
 files += [ROOT / 'Launch AMARA.cmd', ROOT / 'Build Windows EXE.bat', ROOT / 'Check Hongguo Updates.cmd']
 files += list((ROOT / '.github/workflows').glob('*.yml'))
-files += [ROOT / 'docs' / name for name in ['RELEASE-2.8.10.md', 'RELEASE-CURRENT.md', 'UPDATES.md', 'MODIFICATIONS.txt']]
+files += [ROOT / 'docs' / name for name in ['RELEASE-2.8.10.md', 'RELEASE-2.8.11.md', 'RELEASE-CURRENT.md', 'UPDATES.md', 'MODIFICATIONS.txt']]
 for file in files:
     if not file.exists():
         raise ValueError('Missing export file: ' + str(file.relative_to(ROOT)))
