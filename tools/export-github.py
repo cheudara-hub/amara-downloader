@@ -20,7 +20,7 @@ secrets = [license_secret] + [str(provider[key]) for key in ['secret', 'deviceId
 allowed_roots = ['source', 'tests', 'assets']
 allowed_tools = ['build-amara.py', 'build-windows.py', 'set-amara-icon.py', 'check-windows.py',
                  'check-desktop.py', 'apply-pending-update.py', 'installer.nsi', 'prepare-upstream.py',
-                 'configure-private-build.py', 'restore-ci-runtime.py', 'export-github.py']
+                 'configure-private-build.py', 'restore-ci-runtime.py', 'verify-release.py', 'export-github.py']
 files = []
 for name in allowed_roots:
     files += [p for p in (ROOT / name).rglob('*') if p.is_file() and not any(

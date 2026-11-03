@@ -11,3 +11,5 @@ After compatibility review and integration, update `source/update-channel.json`'
 CI uses a checksum-pinned runtime from the bootstrap prerelease `build-runtime-v1`. It has no app archive or user profile. Public source has private provider and license values replaced with placeholders. The `AMARA_PRIVATE_BUILD_CONFIG` encrypted Actions secret restores those values only during a release build. Never commit this secret, local configuration payloads, license-admin files, profiles, queues, media, or build logs.
 
 To publish a reviewed version, push its source and a matching tag such as `v2.8.10`. The published build is available from Releases. Upstream discovery is automated; compatibility fixes still require engineering review. No update system can guarantee that every provider or episode stays available.
+
+An existing successful main-branch Windows build can also be published with the **Publish an existing tested AMARA build** workflow. Supply its run ID. This verifies the source repository/workflow/commit, test report, product/version, installer checksum, and matching source package version before publication. Existing releases are not overwritten.
