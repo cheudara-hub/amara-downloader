@@ -1,0 +1,5 @@
+{
+  "secret": "CONFIGURE_PROVIDER_SECRET",
+  "deviceId": "CONFIGURE_PROVIDER_DEVICE_ID",
+  "apiBase": "https://api.quickplay.my.id"
+}

@@ -1,0 +1,141 @@
+/* AMARA desktop workspace */
+body { font-family: "Segoe UI", sans-serif; font-size: 14px; background: var(--canvas); }
+.sidebar { width: 222px; background: #0e151d; border-right: 1px solid var(--line-soft); padding: 8px 0; }
+.sidebar-brand { padding: 25px 23px 30px; gap: 12px; border: 0; }
+.sidebar-brand .logo { width: 40px; height: 43px; flex-shrink: 0; background: transparent url('./amara-logo.png') center/contain no-repeat; border-radius: 0; }
+.sidebar-brand .logo svg { display: none; }
+.brand-text { font-size: 20px !important; font-weight: 700 !important; letter-spacing: 4px; }
+.brand-sub { margin-top: 5px; font-size: 9px !important; letter-spacing: 1.7px; text-transform: uppercase; color: var(--quiet) !important; }
+.sidebar-menu { padding: 0 14px; gap: 7px; }
+.sidebar-menu::before { content: 'WORKSPACE'; margin: 3px 13px 13px; color: #6d8290; letter-spacing: 1.8px; font-size: 9px; font-weight: 700; }
+.sidebar-item, .amara-browser-launch { display: flex; align-items: center; gap: 11px; min-height: 44px; padding: 12px 14px; border: 1px solid transparent; border-radius: 9px; color: #98acba; font-size: 12px; font-weight: 500; transition: background .15s; }
+.sidebar-item:hover, .amara-browser-launch:hover { background: #192630; color: var(--ink); }
+.sidebar-item.active { background: #8be2c414; border-color: #8be2c42c; box-shadow: none; color: var(--mint); }
+.sidebar-item svg, .amara-browser-launch svg { width: 18px; height: 18px; }
+.amara-browser-launch { width: 100%; background: none; text-align: left; margin: 0; }
+.amara-browser-launch small { margin-left: auto; color: var(--mint); background: #8be2c414; padding: 2px 5px; border-radius: 4px; font-size: 8px; letter-spacing: .8px; }
+.sidebar-footer { margin: 16px 14px 12px; padding: 16px 13px; border: 1px solid var(--line); border-radius: 12px; color: var(--quiet); background: #121d27; font-size: 10px; line-height: 1.7; }
+.footer-note::before { content: 'YOUR PERSONAL CINEMA'; display: block; font-size: 9px; letter-spacing: 1.1px; color: var(--mint); margin-bottom: 5px; }
+.main-wrapper { background: var(--canvas); }
+.main-content { padding: 30px 36px 42px; }
+.amara-topbar { display: flex; align-items: center; justify-content: space-between; height: 72px; min-height: 72px; padding: 0 36px; gap: 18px; border-bottom: 1px solid var(--line-soft); background: #0d141c; }
+.amara-crumb { display: flex; gap: 14px; align-items: center; font-size: 11px; color: var(--quiet); }
+.amara-crumb span::after { content: '/'; margin-left: 14px; color: #405361; }
+.amara-crumb b { color: var(--ink); font-size: 12px; font-weight: 500; }
+.amara-top-actions { display: flex; align-items: center; gap: 10px; }
+.amara-shortcut { color: var(--quiet); font-size: 10px; margin-right: 10px; }
+.amara-avatar { display: grid; place-items: center; width: 34px; height: 34px; border-radius: 50%; background: #273b42; border: 1px solid #3b565c; color: #b1e8d6; font-size: 11px; font-weight: 600; margin-left: 4px; }
+.btn { min-height: 36px; padding: 9px 14px; border-radius: 8px; font-size: 11px; font-weight: 600; box-shadow: none; transition: background .15s, border-color .15s; }
+.btn-primary, .btn-chip-primary { background: var(--mint); color: var(--mint-ink); border: 1px solid var(--mint); box-shadow: none; }
+.btn-primary:hover:not(:disabled), .btn-chip-primary:hover:not(:disabled) { background: #b0f3dc; color: #102c25; border-color: #b0f3dc; }
+.btn-outline, .btn-chip { border-color: var(--line); color: #b7c8d1; background: #15212b; }
+.btn-outline:hover:not(:disabled), .btn-chip:hover:not(:disabled) { background: #22323e; color: #eef5f7; border-color: #4a606f; }
+.amara-welcome { max-width: 1240px; margin: 0 auto 30px; }
+.amara-banner { position: relative; display: flex; justify-content: space-between; gap: 26px; overflow: hidden; padding: 28px 36px; border: 1px solid #2c4246; border-radius: 18px; background: radial-gradient(ellipse at 100% 0, #38574d55, transparent 62%), #142129; }
+.amara-banner-copy { width: min(100%, 630px); z-index: 1; }
+.amara-eyebrow { color: var(--mint); font-size: 9px; font-weight: 650; letter-spacing: 2px; margin-bottom: 15px; }
+.amara-banner h1 { font-size: clamp(27px, 3vw, 39px); font-weight: 600; letter-spacing: -1.5px; line-height: 1.15; margin: 0 0 13px; color: #f0f6f5; }
+.amara-banner p { color: #9eb6bd; font-size: 12px; line-height: 1.8; margin: 0 0 22px; }
+.amara-search { display: flex; align-items: center; gap: 11px; width: 100%; padding: 5px 6px 5px 15px; border: 1px solid #41595c; border-radius: 10px; background: #0b151bbf; }
+.amara-search svg { width: 17px; height: 17px; color: var(--mint); flex-shrink: 0; }
+.amara-search input { flex: 1; min-width: 80px; padding: 9px 0; border: 0; background: none; color: var(--ink); outline-offset: 0; font-size: 12px; }
+.amara-search input::placeholder { color: #7f99a6; }
+.amara-search button { white-space: nowrap; }
+.amara-banner-links { display: flex; gap: 18px; align-items: center; margin-top: 13px; color: #73918f; font-size: 9px; }
+.amara-banner-links button { border: 0; background: none; color: #b4cfc8; padding: 0; font-size: 10px; }
+.amara-banner-links button:hover { color: var(--mint); }
+.amara-cinema-art { width: 180px; flex-shrink: 0; display: grid; place-items: center; position: relative; align-self: stretch; }
+.amara-cinema-art::before, .amara-cinema-art::after { content: ''; position: absolute; width: 112px; height: 154px; border: 1px solid #567367; border-radius: 12px; background: #213a36; transform: rotate(15deg) translate(21px, -2px); }
+.amara-cinema-art::after { background: #172d30; border-color: #45636b; transform: rotate(-12deg) translate(-16px, -4px); }
+.amara-cinema-card { z-index: 1; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 13px; width: 116px; height: 161px; border: 1px solid #70978c; border-radius: 12px; background: linear-gradient(150deg, #39564b, #142d2b); box-shadow: 0 15px 30px #0004; }
+.amara-cinema-card svg { width: 39px; height: 39px; color: #a7e9ce; stroke-width: 1; }
+.amara-cinema-card span { font-size: 8px; letter-spacing: 2px; color: #c1e8d8; }
+.amara-metrics { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; margin-top: 16px; }
+.amara-metric { display: flex; justify-content: space-between; align-items: center; padding: 16px 20px; border: 1px solid var(--line); border-radius: 12px; background: #111b24; }
+.amara-metric span { display: block; font-size: 9px; letter-spacing: 1.1px; color: #819aa9; margin-bottom: 8px; }
+.amara-metric strong { font-size: 25px; font-weight: 500; color: #e4eef1; font-variant-numeric: tabular-nums; }
+.amara-metric small { display: grid; place-items: center; width: 35px; height: 35px; background: #8be2c40d; border-radius: 50%; color: var(--mint); font-size: 16px; }
+.browse-container, .hongguo-container, .dm-container, .player-container { max-width: 1240px; margin: 0 auto; }
+.hongguo-container { padding: 0; }
+.browse-header, .dm-header, .player-header, .settings-header { margin-bottom: 23px; }
+.browse-title h2, .dm-title h2, .player-title h2, .settings-header h2 { font-size: 24px; font-weight: 600; letter-spacing: -.6px; }
+.browse-title>svg, .dm-title>svg, .player-title>svg, .settings-header>svg { color: var(--mint); width: 20px; }
+.browse-cats { padding: 5px; border: 1px solid var(--line); border-radius: 11px; background: #101a23; width: fit-content; gap: 4px; margin-bottom: 16px; }
+.browse-cat { font-size: 11px; min-height: 33px; padding: 8px 17px; border: 0; border-radius: 7px; margin: 0; font-weight: 500; }
+.browse-cat.active { background: #283e3c; color: #bcefdc; }
+.browse-genres { gap: 7px; margin-bottom: 24px; }
+.genre-chip { padding: 6px 11px; font-size: 10px; border: 1px solid var(--line); border-radius: 6px; background: transparent; color: var(--muted); }
+.genre-chip.active { background: #8be2c415; color: var(--mint); border-color: #8be2c44a; }
+.browse-grid { grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); gap: 23px 18px; }
+.browse-cover { border: 1px solid #35434e; border-radius: 11px; box-shadow: 0 8px 20px #0002; }
+.browse-card-title { font-size: 12px; font-weight: 500; line-height: 1.55; margin-top: 11px; }
+.browse-tag { background: #17242e; color: #839cab; border-radius: 4px; padding: 2px 6px; font-size: 9px; }
+.browse-ep-badge { border: 1px solid #ffffff25; backdrop-filter: blur(12px); bottom: 8px; left: 8px; }
+.browse-hover-play { color: #13372b; background: var(--mint); }
+.hongguo-hero { padding: 0; background: none; border: 0; margin-bottom: 22px; gap: 13px; }
+.hero-icon { width: 43px; height: 43px; border-radius: 12px; background: #8be2c410; color: var(--mint); box-shadow: none; }
+.hero-text h2 { font-size: 25px; letter-spacing: -.7px; font-weight: 600; }
+.hero-text p { color: var(--muted); font-size: 12px; }
+.hongguo-card { border: 1px solid var(--line); background: var(--surface); border-radius: 16px; padding: 25px; }
+.mode-tabs { gap: 20px; margin-bottom: 23px; }
+.mode-tab { font-size: 12px; padding: 12px 4px; }
+.mode-tab.active { color: var(--mint); border-color: var(--mint); }
+.input-field { min-height: 43px; border: 1px solid #344652 !important; border-radius: 9px !important; background: #0e1821 !important; color: var(--ink); font-size: 12px; }
+.input-field:focus { border-color: #78baa6 !important; box-shadow: 0 0 0 3px #8be2c40c !important; }
+.episode-card { background: #15222b; border-color: var(--line); padding: 13px; border-radius: 9px; }
+.episode-card.selected { background: #8be2c414; border-color: #8be2c46b; }
+.episode-card:hover { background: #213932; border-color: #638c7e; }
+.icon-checked { color: var(--mint); }
+.badge { background: #203d35; color: #b5e9d6; border-color: #3b6054; }
+.dm-toolbar { padding: 11px; background: #121d26; border: 1px solid var(--line); border-radius: 11px; gap: 8px; margin-bottom: 20px; }
+.dm-queue-bar { background: #172f2b; border-color: #30574b; padding: 12px 15px; }
+.dm-task { padding: 16px 17px; border-radius: 12px; border-color: #293a46; background: #131e28; }
+.dm-task:hover { border-color: #48616e; box-shadow: none; }
+.dm-task-cover { width: 52px; height: 67px; border-radius: 7px; }
+.dm-task-title { font-size: 13px; font-weight: 550; }
+.dm-task-meta { font-size: 11px; gap: 13px; margin-top: 7px; }
+.dm-progress { margin-top: 11px; }
+.dm-progress-bar { height: 4px; background: #283943; }
+.dm-progress-fill { background: var(--mint); }
+.dm-empty, .player-empty { border: 1px solid var(--line); border-radius: 16px; padding: 70px 24px; background: radial-gradient(ellipse at center, #1a302b44, transparent 65%), #111b24; }
+.dm-empty>svg, .player-empty>svg { color: #688e84; width: 46px; height: 46px; stroke-width: 1; }
+.player-stage { border: 1px solid #31454e; border-radius: 14px; box-shadow: 0 18px 55px #0004; }
+.player-series-row, .player-now { border-radius: 10px; border-color: var(--line); padding: 13px 16px; }
+.player-now-title { color: var(--mint); font-size: 12px; }
+.player-episodes { gap: 9px; padding: 8px 0; max-height: 300px; }
+.player-episodes button, .browse-eps button { border-radius: 8px; }
+.series-picker { border-color: #3b4f5b; border-radius: 12px; }
+.series-row { padding: 12px 15px; }
+.series-row.active { background: #8be2c412; }
+.settings-container { max-width: 1000px; margin: 0 auto; }
+.settings-card { padding: 30px; gap: 27px; border-color: var(--line); background: #121d26; border-radius: 16px; }
+.settings-group { gap: 10px; }
+.settings-label { font-size: 12px; color: #d8e6e9; }
+.settings-hint { font-size: 11px; line-height: 1.7; }
+.settings-footer { padding-top: 24px; }
+.browse-drawer, .proxy-modal, .player-confirm { background: #14202a !important; border: 1px solid #3b505c; border-radius: 16px; }
+.browse-drawer-mask, .proxy-mask, .player-confirm-mask { background: #030a12b8; backdrop-filter: blur(6px); }
+.browse-drawer-head, .browse-drawer-foot { padding: 18px 22px; }
+.browse-drawer-body { padding: 22px; }
+.browse-drawer-cover { border-radius: 10px; }
+.amara-toast { position: fixed; right: 28px; bottom: 26px; padding: 15px 20px; border: 1px solid #45695c; border-radius: 12px; background: #1b332c; color: #d0f3e4; z-index: 2000; max-width: 440px; box-shadow: var(--shadow-lg); font-size: 12px; line-height: 1.7; }
+.amara-catalog-error { display: flex; justify-content: space-between; align-items: center; gap: 15px; }
+.amara-catalog-error .btn { flex-shrink: 0; }
+@media(max-width:1100px) { .sidebar { width: 195px; } .sidebar-brand { padding: 24px 17px; } .main-content { padding: 25px; } .amara-topbar { padding: 0 25px; } .amara-shortcut { display: none; } .amara-banner { padding: 28px; } .amara-cinema-art { width: 130px; } .amara-cinema-card { width: 95px; height: 140px; } .amara-cinema-art::before, .amara-cinema-art::after { width: 95px; height: 140px; } .amara-banner h1 { font-size: 30px; } }
+@media(max-width:930px) { .amara-cinema-art { display: none; } .amara-banner-copy { width: 100%; } .amara-metric { padding: 14px; } .amara-metric small { display: none; } .amara-topbar .amara-crumb>span { display: none; } .amara-topbar #amara-add { display: none; } }
+
+.amara-cinema-card span { white-space: nowrap; text-align: center; font-size: 7px; letter-spacing: 1.4px; }
+.amara-web-help { display: flex; align-items: center; justify-content: space-between; gap: 18px; border: 1px solid #344e49; border-radius: 12px; padding: 17px 20px; background: #152720; margin-bottom: 23px; }
+.amara-web-help strong { display: block; color: #c7e8d9; font-size: 12px; font-weight: 500; }
+.amara-web-help span { display: block; color: #8faf9f; font-size: 10px; margin-top: 6px; }
+.amara-web-help button { flex-shrink: 0; }
+.sidebar-item, .amara-browser-launch { font-size: 13px; }
+.btn { font-size: 12px; }
+.player-stage { max-height: 55vh; }
+
+/* Green mark indicator for downloaded dramas and episodes */
+.browse-dl-badge { position: absolute !important; right: 8px !important; top: 8px !important; display: inline-flex !important; align-items: center !important; gap: 4px !important; background: #059669 !important; color: #ffffff !important; padding: 4px 8px !important; border-radius: 6px !important; font-size: 11px !important; font-weight: 700 !important; letter-spacing: 0.2px !important; box-shadow: 0 2px 8px rgba(0, 0, 0, 0.45), 0 0 0 1px rgba(255, 255, 255, 0.2) !important; z-index: 4 !important; }
+.browse-dl-badge.is-all-downloaded { background: #10b981 !important; box-shadow: 0 2px 10px rgba(16, 185, 129, 0.5), 0 0 0 1px rgba(255, 255, 255, 0.3) !important; }
+.browse-card.is-downloaded { box-shadow: 0 0 0 2px #10b981 !important; border-radius: 8px !important; }
+.ep-chip.ep-completed { background: rgba(16, 185, 129, 0.18) !important; border-color: #10b981 !important; color: #10b981 !important; font-weight: 700 !important; }
+.ep-chip .ep-badge { color: #10b981 !important; }

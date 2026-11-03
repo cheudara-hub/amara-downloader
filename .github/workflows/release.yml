@@ -1,0 +1,64 @@
+name: Test and release AMARA Windows
+on:
+  push:
+    tags: ['v*']
+  workflow_dispatch:
+permissions:
+  contents: write
+concurrency:
+  group: amara-release-${{ github.ref }}
+  cancel-in-progress: false
+jobs:
+  windows:
+    runs-on: windows-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '24'
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - run: python -m pip install Pillow numpy
+      - run: choco install nsis -y --no-progress
+      - name: Restore pinned Windows runtime
+        run: python tools/restore-ci-runtime.py
+        env:
+          GH_TOKEN: ${{ github.token }}
+      - name: Install locked dependencies
+        run: npm ci --ignore-scripts --prefix source
+      - name: Restore private build settings
+        run: python tools/configure-private-build.py
+        env:
+          AMARA_PRIVATE_BUILD_CONFIG: ${{ secrets.AMARA_PRIVATE_BUILD_CONFIG }}
+      - name: Verify tag matches application version
+        if: startsWith(github.ref, 'refs/tags/')
+        shell: pwsh
+        run: |
+          $version = (Get-Content source/package.json -Raw | ConvertFrom-Json).version
+          if ($env:GITHUB_REF_NAME -ne "v$version") { throw 'Release tag does not match source/package.json' }
+      - name: Run regression checks and build verified installer
+        run: python -u tools/build-windows.py --no-pause
+      - name: Save test report
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: amara-validation
+          path: artifacts/windows-build/validation.json
+      - name: Save installer artifacts
+        uses: actions/upload-artifact@v4
+        with:
+          name: amara-windows
+          path: |
+            release/AMARA-Downloader-Setup-*.exe
+            release/AMARA-Downloader-Setup-*.sha256
+            release/amara-update.json
+      - name: Publish tested tagged release
+        if: startsWith(github.ref, 'refs/tags/')
+        shell: pwsh
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          gh release create $env:GITHUB_REF_NAME --verify-tag --title "AMARA $env:GITHUB_REF_NAME" --notes-file docs/RELEASE-CURRENT.md --draft
+          gh release upload $env:GITHUB_REF_NAME release/AMARA-Downloader-Setup-*.exe release/AMARA-Downloader-Setup-*.sha256 release/amara-update.json
+          gh release edit $env:GITHUB_REF_NAME --draft=false --latest

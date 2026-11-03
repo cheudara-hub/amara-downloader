@@ -1,0 +1,6 @@
+{
+  "asset": "amara-runtime-win-x64.zip",
+  "sha256": "75b02a1d685c9259216164a5f388ed43ea63f72bf98f3fcbbe92cab84d99e132",
+  "electronVersion": "44.9.1",
+  "source": "Existing AMARA runtime; original licenses/notices retained. No app package or profile."
+}

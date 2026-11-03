@@ -1,0 +1,17 @@
+const assert = require('node:assert/strict');
+const track = require('../source/src/download-progress');
+let time = 0;
+const task = { bytes: 0 };
+const tracker = track(task, () => {}, () => time);
+tracker.read('total_si'); tracker.read('ze=1048576\nout_time=00:00:12.345\n');
+time = 1000; tracker.tick();
+assert.equal(task.bytes, 1048576); assert.equal(task.speedBps, 1048576);
+assert.equal(task.time, '00:00:12');
+for (time = 2000; time <= 8000; time += 1000) tracker.tick();
+assert.equal(task.speedBps, 0, 'A stalled transfer must not keep displaying its old speed');
+tracker.reset();
+assert.equal(task.bytes, 0); assert.equal(task.time, '');
+task.bytes = 4000000;
+tracker.read('total_size=1000\n', false);
+assert.equal(task.bytes, 4000000, 'Remuxing must not overwrite downloaded-byte counts');
+console.log('PASS: fragmented FFmpeg progress, measured speed, stalled transfers, fallback reset and remux byte counts');

@@ -1,0 +1,31 @@
+/* Shared AMARA PRO surfaces inside the single-window workspace. */
+.task-poster-status{font-size:11px;color:#9cacc2;margin-top:10px}
+.hongguo-native-intro{display:flex;align-items:center;justify-content:space-between;gap:24px;padding:24px;border:1px solid #ffffff14;border-radius:16px;background:linear-gradient(120deg,#ff2e930c,#10141d 70%)}.hongguo-native-intro h1{font-size:28px;margin:0 0 8px}.hongguo-native-intro p{font-size:13px;color:#a0aec0;margin:0}.hongguo-native-intro button{flex-shrink:0}
+body.unified-embedded{--canvas:#07090e;--surface:#10141d;--surface-raised:#191f2b;--line:#282d3a;--line-soft:#1c212c;--ink:#f4f6fb;--muted:#a0aec0;--quiet:#718096;--mint:#ff5bae;--mint-ink:#fff;--primary:#ff2e93;--primary-hover:#ff68b2;--accent:#ff2e93;--bg:#07090e;--bg-card:#10141d;--bg-canvas:#07090e;--bg-subtle:#10141d;--bg-elevated:#191f2b;--bg-hover:#202635;--bg-input:#10141d;--bg-inset:#0b0e16;--border:#282d3a;--border-color:#282d3a;--text-primary:#f4f6fb;--text-secondary:#a0aec0;background:#07090e;color:#f4f6fb}
+.unified-embedded .sidebar,.unified-embedded .amara-topbar,.unified-embedded>header,.unified-embedded .window-toolbar,.unified-embedded .compact-navigation{display:none!important}
+.unified-embedded .main-wrapper{margin-left:0;width:100%;background:#07090e}.unified-embedded .main-content{padding:24px 28px 36px}
+.unified-embedded .btn-primary,.unified-embedded .btn-chip-primary,.unified-embedded .primary,.unified-embedded .download{background:linear-gradient(135deg,#ff2e93,#7928ca 60%,#0070f3);border-color:transparent;color:white}
+.unified-embedded .btn-primary:hover,.unified-embedded .primary:hover,.unified-embedded .download:hover:not(:disabled){background:linear-gradient(135deg,#ff55a7,#9845e6 60%,#3894ff);color:white}
+.unified-embedded .btn-outline,.unified-embedded button{border-color:#ffffff18;background-color:#151a24;color:#c4ccdb}
+.unified-embedded input,.unified-embedded select,.unified-embedded textarea{background-color:#10141d;color:#e5e9f2;border-color:#ffffff20}
+.unified-embedded .toolbar{height:64px;padding:12px 24px 8px}.unified-embedded .toolbar form{background:#10141d;border-color:#ffffff20}
+.unified-embedded nav button,.unified-embedded .destination,.unified-embedded .task,.unified-embedded .queue-summary,.unified-embedded .panel-tabs,.unified-embedded .web-area,.unified-embedded .web-label{background:#10141d;border-color:#ffffff15}
+.unified-embedded .browser-layout{inset:104px 24px 20px;grid-template-columns:minmax(300px,1fr) 350px;gap:20px}
+.unified-embedded .queue-filters button.active,.unified-embedded .panel-tabs button[aria-selected=true]{color:#ff8cc3;background:#ff2e931a;border-color:#ff2e9350}
+.unified-embedded.queue-workspace .toolbar,.unified-embedded.queue-workspace>nav,.unified-embedded.queue-workspace .web-area,.unified-embedded.queue-workspace .panel-title,.unified-embedded.queue-workspace .panel-tabs{display:none}
+.unified-embedded.queue-workspace .browser-layout{inset:24px 28px;display:block}.unified-embedded.queue-workspace aside{height:100%;max-width:1280px;margin:auto}
+.unified-embedded.queue-workspace aside:before{content:'Downloads';display:block;font-size:27px;font-weight:750;letter-spacing:-.6px;margin:0 0 14px;color:#fff}
+.unified-embedded.queue-workspace .queue-summary{padding:22px 0;margin:14px 0 20px}.unified-embedded.queue-workspace .queue-summary span{font-size:9px}.unified-embedded.queue-workspace .queue-summary strong{font-size:28px;color:#ff87bf}
+.unified-embedded.queue-workspace .queue-toolbar{flex-direction:row;justify-content:space-between;align-items:center}.unified-embedded.queue-workspace .queue-toolbar>div:last-child{gap:18px}
+.unified-embedded.queue-workspace .task-title{font-size:13px}.unified-embedded.queue-workspace .task-meta{font-size:11px}.unified-embedded.queue-workspace .tasks{display:grid;grid-template-columns:repeat(auto-fill,minmax(350px,1fr));align-content:start;gap:12px}.unified-embedded.queue-workspace .task{margin:0;padding:18px}
+.unified-embedded.queue-workspace #notice{background:#ff2e930a;border-color:#ff2e9325;color:#aeb8ca;font-size:12px;padding:13px 16px}
+.unified-embedded.queue-workspace .queue-filters button{font-size:12px;padding:8px 16px}.unified-embedded.queue-workspace .text-button{font-size:12px}
+.unified-embedded.queue-workspace .footnote{font-size:11px;line-height:1.7}.unified-embedded.queue-workspace .task-title{font-size:14px}.unified-embedded.queue-workspace .task-meta{font-size:12px}.unified-embedded.queue-workspace .empty b{font-size:15px}.unified-embedded.queue-workspace .empty span{font-size:12px}
+@media(max-width:1050px){.unified-embedded .browser-layout{grid-template-columns:minmax(280px,1fr) 310px;gap:14px;left:18px;right:18px}.unified-embedded .hint{display:none}}
+
+/* Green mark indicator for downloaded dramas and episodes */
+.browse-dl-badge { position: absolute !important; right: 8px !important; top: 8px !important; display: inline-flex !important; align-items: center !important; gap: 4px !important; background: #059669 !important; color: #ffffff !important; padding: 4px 8px !important; border-radius: 6px !important; font-size: 11px !important; font-weight: 700 !important; letter-spacing: 0.2px !important; box-shadow: 0 2px 8px rgba(0, 0, 0, 0.45), 0 0 0 1px rgba(255, 255, 255, 0.2) !important; z-index: 4 !important; }
+.browse-dl-badge.is-all-downloaded { background: #10b981 !important; box-shadow: 0 2px 10px rgba(16, 185, 129, 0.5), 0 0 0 1px rgba(255, 255, 255, 0.3) !important; }
+.browse-card.is-downloaded { box-shadow: 0 0 0 2px #10b981 !important; border-radius: 8px !important; }
+.ep-chip.ep-completed { background: rgba(16, 185, 129, 0.18) !important; border-color: #10b981 !important; color: #10b981 !important; font-weight: 700 !important; }
+.ep-chip .ep-badge { color: #10b981 !important; }

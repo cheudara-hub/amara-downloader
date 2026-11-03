@@ -1,0 +1,53 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; img-src 'self' https: http: data:; style-src 'self'; script-src 'self'">
+<title>AMARA | Browser</title>
+<link rel="stylesheet" href="./assets/theme.css"><link rel="stylesheet" href="./assets/media-browser.css">
+<link rel="stylesheet" href="./assets/unified.css">
+<script defer src="./assets/media-browser.js"></script>
+<script defer src="./assets/website-shortcuts.js"></script>
+</head>
+<body>
+<header><div class="brand"><img src="./assets/amara-logo.png" alt="AMARA logo"><div><strong>AMARA</strong><small>MEDIA WORKSPACE</small></div></div><div class="workspace"><span>/</span> Browser</div><span class="pill"><i></i> YOUR PERSONAL CINEMA</span></header>
+<div class="toolbar"><div class="history"><button id="back" title="Back" aria-label="Back">&#8592;</button><button id="forward" title="Forward" aria-label="Forward">&#8594;</button><button id="reload" title="Reload" aria-label="Reload">&#8635;</button></div><form id="address-form"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><circle cx="10.5" cy="10.5" r="6.5"/><path d="m16 16 5 5"/></svg><input id="address" aria-label="Search the web or paste any website link" placeholder="Search the web or paste any website link&hellip;"><kbd>Ctrl L</kbd><button type="submit">Go &#8599;</button></form><button id="collect" class="primary">&#65291; Collect album</button></div>
+<nav aria-label="Website shortcuts"><span>EXPLORE</span><div id="website-shortcuts"><button data-url="https://www.phumi7.net/">Phumi7 &#8599;</button><button data-url="https://www.8khmer.com/">8Khmer &#8599;</button><button data-url="https://www.phumikhmer.net/">Phumikhmer &#8599;</button></div><button id="add-website" type="button" aria-controls="shortcut-editor" aria-expanded="false">+ Add website</button><span class="hint">Find a story. Bring it home.</span></nav>
+<main class="browser-layout"><section class="web-area" aria-label="Website browser"><div class="web-label"><span><i></i> WEBSITE</span><span id="web-title">Your next story starts here</span></div><div class="browser-placeholder"><span>Your website opens here.</span></div></section>
+<aside>
+<section id="shortcut-editor" hidden aria-labelledby="shortcut-editor-title">
+<div class="shortcut-heading"><h2 id="shortcut-editor-title">Website shortcuts</h2><button id="close-shortcut-editor" type="button" aria-label="Close website shortcuts">&#10005;</button></div>
+<p class="shortcut-help">Keep your favorite websites one click away.</p>
+<form id="shortcut-form">
+<label for="shortcut-name">Website name</label><input id="shortcut-name" maxlength="40" placeholder="My favorite dramas" required>
+<label for="shortcut-url">Website address</label><input id="shortcut-url" maxlength="2048" placeholder="https://example.com" required spellcheck="false">
+<p id="shortcut-error" role="alert"></p>
+<div class="shortcut-form-actions"><button id="save-shortcut" type="submit" class="primary">Save shortcut</button><button id="new-shortcut" type="button" hidden>Cancel edit</button></div>
+</form>
+<p id="shortcut-status" role="status"></p>
+<h3 class="shortcut-list-heading">Saved websites</h3><div id="shortcut-list"></div>
+</section>
+<div class="panel-title"><span class="eyebrow">MAKE IT YOURS</span><span class="original-quality">ORIGINAL QUALITY</span></div>
+<div class="panel-tabs" role="tablist" aria-label="Browser workspace"><button id="tab-collection" role="tab" aria-selected="true" aria-controls="collection-panel">Collection</button><button id="tab-queue" role="tab" aria-selected="false" aria-controls="queue-panel">Downloads <span id="queue-count">0</span></button></div>
+<div id="notice" role="status">Open an episode list, then collect the album.</div>
+<section id="collection-panel" role="tabpanel" aria-labelledby="tab-collection">
+<div class="collection-scroll">
+<section class="album-card"><div class="cover"><img id="poster" alt="Album poster" hidden><span id="poster-empty">&#9639;<small>YOUR POSTER</small></span></div><div class="album-info"><span class="eyebrow">YOUR NEXT MOVIE NIGHT</span><label for="album-title" class="sr-only">Album title</label><input id="album-title" placeholder="A story worth keeping"><div id="album-count">Collect an album to get started</div><button id="save-poster" class="text-button">&#8595; Save poster</button></div></section>
+<div class="section-label"><strong>Episodes <span id="episode-count">0</span></strong><div><button id="select-all" class="text-button">Select all</button><button id="select-none" class="text-button">Clear</button></div></div>
+<div id="episodes" class="episodes"><div class="empty"><b>A whole series, in one place.</b><span>Open a movie&#8217;s episode list and click Collect album.</span></div></div>
+<button id="capture" class="capture">&#65291; Use playing video <span id="detected"></span></button>
+<div class="destination"><div class="destination-heading"><span class="eyebrow">SAVE LOCATION</span><button id="choose-folder" class="text-button">Change &#8599;</button></div><div><span id="folder">Downloads</span></div><small>One album folder &middot; numbered episodes &middot; poster included</small></div>
+<div class="download-options"><label for="concurrency">Videos at once</label><select id="concurrency"><option value="1">1 video</option><option value="2">2 videos</option><option value="3" selected>3 videos</option><option value="4">4 videos</option><option value="5">5 videos</option><option value="6">6 videos</option><option value="7">7 videos</option><option value="8">8 videos</option></select></div>
+</div><div class="download-footer"><button id="download" class="download" disabled>&#8595; Select episodes to download</button><span id="selection-hint">Your collection stays organized automatically.</span></div>
+</section>
+<section id="queue-panel" role="tabpanel" aria-labelledby="tab-queue" hidden>
+<div class="queue-summary"><div><strong id="active-count">0</strong><span>IN PROGRESS</span></div><div><strong id="complete-count">0</strong><span>COMPLETED</span></div><div><strong id="attention-count">0</strong><span>NEED ATTENTION</span></div></div>
+<div class="queue-toolbar"><div class="queue-filters" role="group" aria-label="Filter downloads"><button data-filter="all" class="active">All</button><button data-filter="active">Active</button><button data-filter="failed">Failed</button><button data-filter="completed">Done</button></div><div><button id="retry" class="text-button">Resume / retry</button><button id="stop" class="text-button">Stop all</button><button id="clear-completed" class="text-button" title="Remove completed downloads from this list. Saved files are kept.">Clear completed</button><button id="clear-all" class="text-button" title="Remove inactive downloads from this list. Saved files are kept.">Clear all</button></div></div>
+<div class="queue-toolbar"><label>Source <select id="queue-source"><option value="all">All downloads</option><option value="catalog">Catalog</option><option value="other">Catalog &amp; Browser</option><option value="hongguo">Hongguo</option></select></label><label>Videos at once <select id="queue-concurrency"><option value="1">1</option><option value="2">2</option><option value="3" selected>3</option><option value="4">4</option><option value="5">5</option><option value="6">6</option><option value="7">7</option><option value="8">8</option></select></label><div><span id="native-speed" class="footnote"></span> <button id="native-settings" class="text-button">Speed settings</button><button id="native-manager" class="text-button">Merge Hongguo series</button></div></div>
+<div class="queue-toolbar"><span id="queue-page" class="footnote"></span><div><button id="queue-previous" class="text-button">Previous</button><button id="queue-next" class="text-button">Next</button></div></div>
+<p id="queued-summary" class="footnote" role="status">0 queued &middot; 0.00 MB/s total</p>
+<div id="tasks" class="tasks"><div class="empty"><b>Ready for your next story.</b><span>Your download progress will appear here.</span></div></div>
+<p class="footnote">Downloads continue while you browse. Failed episodes can be opened and retried individually.</p>
+</section>
+</aside></main>
+</body></html>

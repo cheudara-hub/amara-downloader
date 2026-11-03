@@ -1,0 +1,170 @@
+﻿:root{color-scheme:dark;font-family:Inter,"Segoe UI",sans-serif}
+.app-header{height:68px;padding:0 28px;gap:24px;background:#0b0e15;backdrop-filter:blur(20px);border-bottom:1px solid #ffffff0d}
+.header-left,.header-right{min-width:0}.header-right{margin-left:auto;gap:12px}.brand-text{white-space:nowrap}.logo-img{height:38px}
+.header-search-wrapper{width:300px;max-width:30vw}.header-search-wrapper input{width:100%}
+.workspace-nav{position:sticky;top:68px;z-index:100;display:flex;align-items:center;gap:7px;height:56px;padding:8px 28px;background:#0b0e15;border-bottom:1px solid #ffffff12;overflow-x:auto;scrollbar-width:none}
+.workspace-nav::-webkit-scrollbar{display:none}.workspace-nav .nav-link{flex-shrink:0;padding:8px 15px;font-size:12px;font-weight:600;white-space:nowrap;border-radius:9px;gap:8px}
+.workspace-nav .nav-link.active{background:var(--gradient-brand);color:white;box-shadow:0 4px 18px #d52d9925}
+.workspace-nav-divider{height:20px;width:1px;background:#ffffff15;flex-shrink:0;margin:0 8px}
+.workspace-bars{position:sticky;top:68px;z-index:100;background:#0b0e15}.workspace-bars .workspace-nav{position:static}
+.download-source-tabs{display:none;align-items:center;gap:10px;height:40px;padding:4px 28px;border-bottom:1px solid #ffffff12}
+body[data-workspace-route=downloads] .download-source-tabs,body[data-workspace-route=transfers] .download-source-tabs{display:flex}
+.download-source-tabs>span{color:#718096;font-size:9px;letter-spacing:1.4px;margin-right:12px}.download-source-tabs button{border:1px solid transparent;background:none;color:#a0aec0;border-radius:6px;padding:5px 12px;font-size:11px;cursor:pointer}.download-source-tabs button.active{background:#ff2e9318;color:#ff90c8;border-color:#ff2e9330}
+.platform-bar-container{top:124px}.app-main{max-width:1500px}.hero-banner{border:1px solid #ffffff0e}
+#desktopLanguage{color:#cad1e1;background:#151a24;border:1px solid #ffffff20;border-radius:8px;padding:8px;max-width:115px}
+.platform-pill:focus-visible,.drama-card:focus-visible,.episode-btn:focus-visible,button:focus-visible{outline:2px solid #ff80bd;outline-offset:3px}
+body.workspace-native{overflow:hidden}body.workspace-native #platformBarContainer,body.workspace-native .app-main{display:none}
+.mobile-bottom-nav,#btnToggleSidebar{display:none!important}
+@media(max-width:1100px){.workspace-nav{padding:8px 20px;gap:4px}.workspace-nav .nav-link{padding:8px 10px;font-size:11px}.workspace-nav-divider{margin:0 4px}.app-header{padding:0 20px}.brand-text{font-size:20px}.header-search-wrapper.desktop-only{display:flex;width:240px}}
+@media(max-width:950px){.workspace-nav .nav-link{padding:8px 9px}.workspace-nav .nav-link i{display:none}.header-search-wrapper.desktop-only{max-width:28vw}}
+
+/* Compact detail controls and flexible columns keep the whole dialog in view. */
+#modalDetail{width:100%;max-width:900px;max-height:calc(100vh - 48px);overflow-x:hidden}
+#modalDetail .detail-body{grid-template-columns:200px minmax(0,1fr);gap:26px;padding:28px;align-items:start}
+#modalDetail .detail-info,#modalDetail .detail-poster-wrap{min-width:0}
+#modalDetail .detail-info{gap:14px;padding-top:4px}
+#modalDetail .detail-title{font-size:26px;line-height:1.25;padding-right:32px;overflow-wrap:anywhere}
+#modalDetail .detail-meta{gap:8px 14px;font-size:12px}
+#modalDetail .detail-meta span{min-width:0;overflow-wrap:anywhere}
+#modalDetail .detail-synopsis-box{padding:12px 14px}
+#modalDetail .detail-synopsis-text{font-size:13px;line-height:1.75;overflow-wrap:anywhere}
+#modalDetail .detail-actions{gap:10px;flex-wrap:wrap;margin-top:0}
+#modalDetail .detail-icon-btn{display:inline-flex;align-items:center;justify-content:center;flex:0 0 40px;width:40px;height:40px;min-width:40px;min-height:40px;padding:0;border-radius:10px;font-size:15px;line-height:1;border:1px solid #ffffff1c;box-shadow:none;transform:none;cursor:pointer}
+#modalDetail .detail-icon-btn i{margin:0;pointer-events:none}
+#modalDetail .btn-primary.detail-icon-btn{background:var(--gradient-brand);border-color:transparent;color:#fff}
+#modalDetail .btn-download.detail-icon-btn{background:#00b8db12;color:#4ed6ed;border-color:#00b8db30}
+#modalDetail .btn-batch-download.detail-icon-btn,#modalDetail .btn-batch-header.detail-icon-btn{background:#10b98112;color:#43d4ad;border-color:#10b98130}
+#modalDetail .btn-secondary.detail-icon-btn{background:#ffffff08;color:#b6c1d3}
+#modalDetail .btn-secondary.detail-icon-btn[aria-pressed=true]{background:#ff2e9318;color:#ff80bd;border-color:#ff2e9350}
+#modalDetail .detail-icon-btn:hover{filter:brightness(1.25);border-color:currentColor}
+#modalDetail .episodes-header{gap:12px;flex-wrap:wrap}
+#modalDetail .episodes-header-left{min-width:0;gap:8px;flex-wrap:wrap}
+#modalDetail .episodes-header h3{font-size:18px}
+#modalDetail .btn-batch-header.detail-icon-btn{width:32px;height:32px;min-width:32px;min-height:32px;flex-basis:32px;font-size:13px;border-radius:8px}
+#modalDetail .detail-episodes-section{margin-top:4px}
+#modalDetail .episode-btn{gap:9px;min-height:38px;padding:9px 8px;font-size:12px}
+#modalDetail .ep-download-icon{font-size:11px;color:#9aa8bb}
+#modalDetail .episodes-grid{grid-template-columns:repeat(auto-fill,minmax(58px,1fr))}
+@media(max-width:700px){#modalDetail .detail-body{grid-template-columns:minmax(0,1fr);padding:22px;gap:20px}#modalDetail .detail-poster-wrap{max-width:150px;margin:0 auto}#modalDetail .detail-title{font-size:23px}#modalDetailOverlay{padding:14px}}
+
+/* Desktop refresh: calmer chrome, readable artwork, and a clear content hierarchy. */
+:root {
+  --font-heading: "Segoe UI", Arial, sans-serif;
+  --font-body: "Segoe UI", Arial, sans-serif;
+  --text-secondary: #abb6cb;
+  --text-muted: #8996ad;
+  --bg-primary: #090c13;
+  --bg-card: #121824;
+  --border-color: #ffffff12;
+}
+body { background: radial-gradient(ellipse at 85% 15%, #18203b44, transparent 50%), var(--bg-primary); }
+.app-header { height: 72px; padding: 0 32px; background: #0d111bef; }
+.brand-logo { gap: 12px; }
+.brand-text { font-size: 22px; letter-spacing: -.7px; }
+.brand-badge { font-size: 10px; padding: 3px 8px; background: #6579ed12; border-color: #6579ed30; color: #a7b5f9; }
+.logo-img { height: 40px; filter: none; }
+.header-search-wrapper { width: 340px; max-width: 35vw; }
+.header-search-wrapper input { height: 40px; border-radius: 10px; background: #161c29; font-size: 13px; }
+.header-search-wrapper input:focus { width: 100%; border-color: #9c85ed; box-shadow: 0 0 0 3px #9c85ed15; }
+#desktopLanguage { height: 40px; border-radius: 10px; padding: 0 12px; background: #161c29; font-size: 12px; }
+.header-right > .icon-btn { width: 40px; height: 40px; border-radius: 10px; }
+.workspace-bars { top: 72px; background: #0d111b; }
+.workspace-nav { height: 52px; padding: 0 32px; gap: 5px; background: transparent; }
+.workspace-nav .nav-link { position: relative; height: 36px; border-radius: 8px; padding: 0 13px; font-size: 12px; color: #9daac0; font-weight: 600; }
+.workspace-nav .nav-link i { font-size: 12px; opacity: .8; }
+.workspace-nav .nav-link.active { background: #a88aff14; box-shadow: none; color: #c6b4ff; }
+.workspace-nav .nav-link.active::after { content: ''; position: absolute; height: 2px; bottom: -8px; left: 12px; right: 12px; border-radius: 2px; background: linear-gradient(90deg, #e264bf, #8a93ff); }
+.workspace-nav-divider { margin: 0 9px; }
+.platform-bar-container { display: flex; align-items: center; gap: 18px; padding: 12px 32px; background: #0d111b88; }
+.platform-label { flex: 0 0 auto; font-size: 9px; font-weight: 700; letter-spacing: 1.6px; color: #8996ad; }
+.platform-bar-scroll { flex: 1; min-width: 0; gap: 8px; padding: 3px 2px; scrollbar-width: none; }
+.platform-bar-scroll::-webkit-scrollbar { display: none; }
+.platform-pill { flex-shrink: 0; height: 34px; padding: 0 12px; border-radius: 8px; background: #ffffff03; font-size: 12px; font-weight: 500; }
+.platform-pill.active { background: #ac8aff18; color: #e2d5ff; border-color: #b899ff66; box-shadow: none; }
+.platform-pill img { width: 17px; height: 17px; }
+.platform-scroll-controls { display: flex; flex: 0 0 auto; gap: 5px; }
+.platform-scroll-controls button { width: 28px; height: 32px; border: 1px solid #ffffff14; border-radius: 7px; color: #c1cbe0; background: #161c29; cursor: pointer; }
+.platform-scroll-controls button:hover:not(:disabled) { background: #262d43; }
+.platform-scroll-controls button:disabled { opacity: .3; cursor: default; }
+.app-main { max-width: 1560px; padding: 25px 32px 48px; }
+.home-heading { display: flex; justify-content: space-between; align-items: flex-end; gap: 20px; margin-bottom: 23px; }
+.home-eyebrow { color: #a99aca; font-size: 9px; font-weight: 700; letter-spacing: 2px; margin-bottom: 5px; }
+.home-heading h1 { font-size: 27px; font-weight: 650; letter-spacing: -.8px; line-height: 1.3; }
+.home-heading-note { color: var(--text-muted); font-size: 12px; padding-bottom: 3px; }
+.hero-banner { min-height: 355px; padding: 34px 38px; margin-bottom: 30px; border-radius: 18px; background: #101522; border-color: #ffffff12; align-items: center; box-shadow: 0 12px 40px #00000024; }
+.hero-backdrop { left: auto; right: 0; width: 64%; background-position: center 24%; filter: brightness(.88) saturate(.9); }
+.hero-gradient-overlay { background: linear-gradient(90deg, #101522 3%, #101522fa 30%, #101522c9 46%, #10152215 78%), linear-gradient(0deg, #101522c9, transparent 55%); }
+.hero-content { max-width: 56%; }
+.hero-platform-badge { background: #f266b912; color: #f59bce; border-color: #f266b930; border-radius: 6px; font-size: 9px; letter-spacing: 1.3px; padding: 5px 9px; margin-bottom: 15px; }
+.hero-title { font-size: clamp(27px, 2.8vw, 42px); line-height: 1.12; font-weight: 750; letter-spacing: -1.1px; margin-bottom: 16px; text-shadow: none; }
+.hero-meta { gap: 8px; margin-bottom: 14px; }
+.hero-tag { border-radius: 5px; padding: 3px 8px; background: #ffffff0a; color: #c6cee0; font-size: 10px; font-weight: 500; }
+.hero-tag i { color: #9d91c4; }
+.hero-synopsis { max-width: 490px; font-size: 12px; line-height: 1.8; color: #b0bace; text-shadow: none; -webkit-line-clamp: 2; margin-bottom: 22px; }
+.hero-actions { gap: 10px; }
+.hero-actions .btn { min-height: 42px; padding: 10px 18px; border-radius: 9px; font-size: 12px; }
+.hero-actions .btn-primary { background: linear-gradient(115deg, #bd439c, #7955cf 60%, #536de0); box-shadow: 0 4px 18px #a34ec02b; }
+.hero-actions .btn-secondary { background: #ffffff09; border-color: #ffffff24; }
+.hero-actions .btn-icon-round { width: 42px; padding: 0; border-radius: 9px; font-size: 16px; background: #ffffff09; }
+.section-header { margin-bottom: 16px; }
+.section-title { font-size: 20px; font-weight: 650; letter-spacing: -.5px; }
+.section-icon { font-size: 16px; }
+.section-count { background: transparent; border: 1px solid #ffffff12; border-radius: 6px; font-size: 10px; padding: 4px 9px; color: #a9b5cb; }
+.drama-grid { grid-template-columns: repeat(auto-fill, minmax(172px, 1fr)); gap: 20px; }
+.drama-card { border-radius: 12px; background: #111722; border-color: #ffffff0d; }
+.drama-card:hover { transform: translateY(-4px); border-color: #b899ff66; box-shadow: 0 12px 26px #00000055; }
+.card-poster-wrap { aspect-ratio: 2 / 2.8; }
+.card-content { padding: 12px 13px 14px; gap: 5px; }
+.card-title { font-size: 13px; line-height: 1.5; font-weight: 600; }
+.card-badge { font-size: 8px; border-radius: 5px; padding: 4px 6px; letter-spacing: .5px; }
+.badge-platform-tag { background: #141b30dc; border: 1px solid #ffffff2b; color: #eee6ff; backdrop-filter: blur(8px); }
+.badge-episodes { background: #090c13bf; }
+.card-tag { color: #a1aec4; background: #ffffff04; font-size: 10px; padding: 2px 6px; }
+.page-title { font-size: 28px; letter-spacing: -.7px; }
+.custom-select, .search-input-box { border-radius: 10px; }
+@media (min-width: 1450px) { .hero-banner { min-height: 390px; } }
+@media (max-width: 1100px) {
+  .app-header { padding: 0 24px; }
+  .workspace-nav { padding: 0 24px; gap: 2px; }
+  .workspace-nav .nav-link { padding: 0 9px; font-size: 11px; }
+  .workspace-nav-divider { margin: 0 4px; }
+  .app-main { padding: 22px 24px 40px; }
+  .platform-bar-container { padding: 10px 24px; gap: 12px; }
+  .hero-banner { padding: 28px; min-height: 330px; }
+  .hero-content { max-width: 62%; }
+  .hero-title { font-size: 31px; }
+  .drama-grid { gap: 16px; grid-template-columns: repeat(auto-fill, minmax(155px, 1fr)); }
+}
+@media (max-width: 950px) {
+  .workspace-nav .nav-link i { display: inline-block; }
+  .workspace-nav .nav-link { padding: 0 8px; gap: 5px; }
+  .home-heading-note { display: none; }
+  .platform-label { display: none; }
+  .brand-text { font-size: 19px; }
+  .brand-badge { display: none; }
+}
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { animation-duration: .01ms !important; transition-duration: .01ms !important; scroll-behavior: auto !important; }
+}
+/* Completion labels stay below the poster, clear of provider badges. */
+.downloaded-badge { display: inline-flex; align-items: center; margin-bottom: 8px; padding: 4px 8px; border: 1px solid #32885a; border-radius: 6px; background: #113a27; color: #8df0b2; font-size: 11px; font-weight: 700; }
+.downloaded-badge.download-partial { color: #ffe0a0; background: #3b2c12; border-color: #80602a; }
+.drama-card.is-downloaded { border-color: #32885a; }
+.episode-downloaded .ep-download-icon, .download-status-saved { color: #8df0b2 !important; }
+.episode-btn.episode-downloaded { border-color: #32885a; background: #113a27; }
+.provider-more{display:flex;align-items:center;justify-content:space-between;gap:18px;margin:22px 0;padding:16px;border:1px solid #ffffff18;border-radius:12px;background:#ffffff06}
+.provider-more[hidden],.provider-more button[hidden]{display:none}
+.provider-more>span{color:#b9c5db;font-size:13px;line-height:1.5}
+.provider-more button{flex-shrink:0;min-height:44px}
+.amara-update-dialog{color:#edf2ff;background:#121c29;border:1px solid #36445b;border-radius:16px;width:min(620px,calc(100vw - 32px));max-height:85vh;overflow:auto;padding:24px;box-shadow:0 20px 80px #0009}
+.amara-update-dialog::backdrop{background:#050911b8}
+.amara-update-dialog p{line-height:1.6;color:#bac7da;margin:12px 0}
+.amara-update-dialog section{padding:18px 0;border-top:1px solid #ffffff18}
+.amara-update-dialog h2,.amara-update-dialog h3{margin:0}
+.amara-update-dialog button{background:#263751;border:1px solid #506580;border-radius:8px;padding:10px 14px;color:white;cursor:pointer;min-height:40px}
+.amara-update-dialog button:disabled{opacity:.5;cursor:default}
+.amara-update-dialog button[hidden]{display:none}
+.update-heading,.update-footer{display:flex;gap:18px;align-items:center;justify-content:space-between}
+.update-footer{border-top:1px solid #ffffff18;padding-top:18px}
+.update-footer span,.amara-update-dialog .update-note{font-size:12px;color:#94a8c4}
+@media(max-width:640px){.provider-more{flex-direction:column;align-items:stretch}}

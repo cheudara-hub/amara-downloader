@@ -1,0 +1,523 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; img-src 'self' data: https: http:; media-src 'self' blob: http://127.0.0.1:*; connect-src 'self' http://127.0.0.1:*; style-src 'self' 'unsafe-inline'; script-src 'self'; worker-src 'self' blob:; font-src 'self'" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+  <title>AMARA PRO DL - Short Drama Streaming & Downloader</title>
+  <meta name="description" content="AMARA PRO DL - All-in-One Short Drama Streaming & Downloader with 50+ integrated platforms (DramaBox, Melolo, SodaReels, ShortMax, etc.)." />
+  <link rel="icon" type="image/png" href="./assets/logo.png" />
+  <!-- Google Fonts: Outfit & Inter -->
+  <!-- FontAwesome Icons -->
+  <link rel="stylesheet" href="./vendor/css/all.min.css" />
+  <link rel="stylesheet" href="./style.css" />
+<link rel="stylesheet" href="./desktop.css" />
+<link rel="stylesheet" href="./license.css" />
+</head>
+<body class="theme-dark">
+  <div id="app" class="app-layout">
+
+    <!-- Top Navigation Bar -->
+    <header class="app-header glass-header" id="appHeader">
+      <div class="header-left">
+        <button id="btnToggleSidebar" class="icon-btn mobile-only" aria-label="Menu">
+          <i class="fa-solid fa-bars"></i>
+        </button>
+        <div class="brand-logo" id="brandLogoHome">
+          <img src="./assets/logo.png" alt="AMARA PRO DL" class="logo-img" />
+          <span class="brand-text">AMARA <span class="gradient-text">PRO DL</span></span>
+          <span class="brand-badge" title="AMARA PRO DL version">AMARA</span>
+        </div>
+      </div>
+
+      <nav class="desktop-nav desktop-only">
+        <button class="nav-link active" data-tab="home" id="navHome">
+          <i class="fa-solid fa-house"></i> Home
+        </button>
+        <button class="nav-link" data-tab="discover" id="navDiscover">
+          <i class="fa-solid fa-compass"></i> Discover
+        </button>
+        <button class="nav-link" data-tab="search" id="navSearch">
+          <i class="fa-solid fa-magnifying-glass"></i> Search
+        </button>
+        <button class="nav-link" data-tab="watchlist" id="navWatchlist">
+          <i class="fa-solid fa-bookmark"></i> My List
+        </button>
+      </nav>
+
+      <div class="header-right">
+        <!-- Quick search bar in header -->
+        <div class="header-search-wrapper desktop-only">
+          <i class="fa-solid fa-magnifying-glass search-icon"></i>
+          <input type="text" id="headerSearchInput" placeholder="Search drama, CEO, romance..." />
+        </div>
+
+        <!-- Language toggle -->
+        <div class="lang-selector" id="langSelector">
+          <button class="lang-btn" id="btnLangToggle" title="Select Language">
+            <i class="fa-solid fa-globe"></i>
+            <span id="currentLangText">EN</span>
+          </button>
+        </div>
+
+        <!-- Refresh API Cache -->
+        <button class="icon-btn" id="btnRefreshData" title="Refresh Data">
+          <i class="fa-solid fa-rotate-right"></i>
+        </button>
+      </div>
+    </header>
+
+    <!-- Platform Selector Bar -->
+    <section class="platform-bar-container" id="platformBarContainer">
+      <div class="platform-bar-scroll" id="platformBar">
+        <!-- Injected via JavaScript -->
+        <div class="platform-skeleton"></div>
+      </div>
+    </section>
+
+    <!-- Main Content Area -->
+    <main class="app-main" id="mainContent">
+
+      <!-- TAB 1: HOME -->
+      <section class="tab-content active" id="tabHome">
+        <div class="home-heading">
+          <div>
+            <p class="home-eyebrow">YOUR DAILY DOSE OF DRAMA</p>
+            <h1>Find your next story.</h1>
+          </div>
+          <p class="home-heading-note">Explore. Watch. Keep your favorites.</p>
+        </div>
+        <!-- Featured Hero Banner -->
+        <div class="hero-banner" id="heroBanner">
+          <div class="hero-backdrop" id="heroBackdrop"></div>
+          <div class="hero-gradient-overlay"></div>
+          <div class="hero-content">
+            <span class="hero-platform-badge" id="heroPlatformBadge">
+              <i class="fa-solid fa-fire"></i> Daily Recommendation
+            </span>
+            <h2 class="hero-title" id="heroTitle">Loading Featured Drama...</h2>
+            <div class="hero-meta" id="heroMeta">
+              <span class="hero-tag" id="heroEpisodes"><i class="fa-solid fa-film"></i> -- Episodes</span>
+              <span class="hero-tag" id="heroViews"><i class="fa-solid fa-eye"></i> -- Views</span>
+              <span class="hero-tag" id="heroCategory"><i class="fa-solid fa-layer-group"></i> DramaBox</span>
+            </div>
+            <p class="hero-synopsis" id="heroSynopsis">Loading featured drama synopsis...</p>
+            <div class="hero-actions">
+              <button class="btn btn-primary" id="btnHeroPlay">
+                <i class="fa-solid fa-play"></i> Watch Episode 1
+              </button>
+              <button class="btn btn-secondary" id="btnHeroDetail">
+                <i class="fa-solid fa-circle-info"></i> Drama Details
+              </button>
+              <button class="btn btn-icon-round" id="btnHeroBookmark" title="Save to My List">
+                <i class="fa-regular fa-bookmark"></i>
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Drama Sections -->
+        <div class="drama-sections-container">
+          <!-- Section 1: Trending Now -->
+          <div class="drama-section">
+            <div class="section-header">
+              <div class="section-title-wrap">
+                <span class="section-icon"><i class="fa-solid fa-fire gradient-icon"></i></span>
+                <h2 class="section-title">Trending on <span class="current-platform-name">DramaBox</span></h2>
+              </div>
+              <span class="section-count" id="sectionCountPopular">0 Dramas</span>
+            </div>
+            <div class="drama-grid" id="gridPopular">
+              <!-- Cards injected by JS -->
+            </div>
+          </div>
+
+          <!-- Section 2: Recommended / Latest -->
+          <div class="drama-section">
+            <div class="section-header">
+              <div class="section-title-wrap">
+                <span class="section-icon"><i class="fa-solid fa-sparkles gradient-icon"></i></span>
+                <h2 class="section-title">Latest & Complete Episodes</h2>
+              </div>
+            </div>
+            <div class="drama-grid" id="gridLatest">
+              <!-- Cards injected by JS -->
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- TAB 2: DISCOVER -->
+      <section class="tab-content" id="tabDiscover">
+        <div class="page-header">
+          <div class="page-title-group">
+            <h1 class="page-title">Discover Dramas</h1>
+            <p class="page-subtitle">Browse from over 50 of the world's best short drama platforms</p>
+          </div>
+          <div class="filter-controls">
+            <select id="selectDiscoverPlatform" class="custom-select">
+              <!-- Options populated by JS -->
+            </select>
+          </div>
+        </div>
+
+        <div class="drama-grid" id="gridDiscover">
+          <!-- Cards injected by JS -->
+        </div>
+      </section>
+
+      <!-- TAB 3: SEARCH -->
+      <section class="tab-content" id="tabSearch">
+        <div class="search-page-header">
+          <div class="search-input-box">
+            <i class="fa-solid fa-magnifying-glass"></i>
+            <input type="text" id="mainSearchInput" placeholder="Type drama title, actor, theme (CEO, revenge, billionaire)..." autofocus />
+            <button id="btnClearSearch" class="btn-clear hidden"><i class="fa-solid fa-xmark"></i></button>
+          </div>
+        </div>
+
+        <!-- Popular Tags Bar -->
+        <div class="popular-tags-container">
+          <span class="tags-label"><i class="fa-solid fa-arrow-trend-up"></i> Popular Searches:</span>
+          <div class="tags-cloud" id="popularTagsCloud">
+            <!-- Injected by JS -->
+          </div>
+        </div>
+
+        <!-- Search Results Grid -->
+        <div class="search-results-container">
+          <div class="search-status-bar" id="searchStatusBar">
+            <span id="searchResultCountText">Enter keywords to start searching</span>
+          </div>
+          <div class="drama-grid" id="gridSearch">
+            <!-- Results injected by JS -->
+          </div>
+        </div>
+      </section>
+
+      <!-- TAB 4: WATCHLIST & HISTORY -->
+      <section class="tab-content" id="tabWatchlist">
+        <div class="page-header">
+          <div class="page-title-group">
+            <h1 class="page-title">My List & History</h1>
+            <p class="page-subtitle">Dramas you have saved and recently watched</p>
+          </div>
+          <div class="tab-pills">
+            <button class="pill-btn active" id="pillWatchlist">Saved List (<span id="savedCount">0</span>)</button>
+            <button class="pill-btn" id="pillHistory">Watch History (<span id="historyCount">0</span>)</button>
+          </div>
+        </div>
+
+        <div class="drama-grid" id="gridWatchlist">
+          <!-- Injected by JS -->
+        </div>
+      </section>
+
+    </main>
+
+    <!-- Bottom Navigation Bar (Mobile) -->
+    <nav class="mobile-bottom-nav mobile-only">
+      <button class="mobile-nav-item active" data-tab="home">
+        <i class="fa-solid fa-house"></i>
+        <span>Home</span>
+      </button>
+      <button class="mobile-nav-item" data-tab="discover">
+        <i class="fa-solid fa-compass"></i>
+        <span>Discover</span>
+      </button>
+      <button class="mobile-nav-item" data-tab="search">
+        <i class="fa-solid fa-magnifying-glass"></i>
+        <span>Search</span>
+      </button>
+      <button class="mobile-nav-item" data-tab="watchlist">
+        <i class="fa-solid fa-bookmark"></i>
+        <span>My List</span>
+      </button>
+    </nav>
+
+    <!-- MODAL: DRAMA DETAIL -->
+    <div class="modal-overlay hidden" id="modalDetailOverlay">
+      <div class="modal-container glass-modal" id="modalDetail">
+        <button class="modal-close-btn" id="btnCloseDetailModal" aria-label="Close">
+          <i class="fa-solid fa-xmark"></i>
+        </button>
+
+        <div class="detail-backdrop" id="detailBackdrop"></div>
+
+        <div class="detail-body">
+          <div class="detail-poster-wrap">
+            <img src="./assets/placeholder_drama.png" alt="Cover" class="detail-poster" id="detailPoster" />
+            <div class="detail-badges" id="detailBadges">
+              <span class="badge badge-platform" id="detailPlatform">Platform</span>
+              <span class="badge badge-status" id="detailStatus">Status</span>
+            </div>
+          </div>
+
+          <div class="detail-info">
+            <h2 class="detail-title" id="detailTitle">Drama Title</h2>
+            <div class="detail-meta">
+              <span id="detailAuthor"><i class="fa-solid fa-user-pen"></i> Author</span>
+              <span id="detailViews"><i class="fa-solid fa-eye"></i> Views</span>
+              <span id="detailEpisodesTotal"><i class="fa-solid fa-list-ol"></i> 0 Episodes</span>
+            </div>
+
+            <!-- Tags -->
+            <div class="detail-tags-cloud" id="detailTagsCloud"></div>
+
+            <!-- Synopsis -->
+            <div class="detail-synopsis-box">
+              <p class="detail-synopsis-text" id="detailSynopsis">Drama synopsis...</p>
+            </div>
+
+            <!-- Action buttons -->
+            <div class="detail-actions" role="group" aria-label="Drama actions">
+              <button class="btn btn-primary detail-icon-btn" id="btnDetailPlayFirst" title="Watch episode 1" aria-label="Watch episode 1">
+                <i class="fa-solid fa-play" aria-hidden="true"></i>
+              </button>
+              <button class="btn btn-download detail-icon-btn" id="btnDetailDownloadFirst" title="Download episode 1" aria-label="Download episode 1">
+                <i class="fa-solid fa-download" aria-hidden="true"></i>
+              </button>
+              <button class="btn btn-batch-download detail-icon-btn" id="btnDetailDownloadAll" title="Download all episodes" aria-label="Download all episodes">
+                <i class="fa-solid fa-cloud-arrow-down" aria-hidden="true"></i><span id="btnDetailDownloadAllCount" hidden>0</span>
+              </button>
+              <button class="btn btn-secondary detail-icon-btn" id="btnDetailBookmark" title="Save to My List" aria-label="Save to My List" aria-pressed="false">
+                <i class="fa-regular fa-bookmark" aria-hidden="true"></i>
+              </button>
+            </div>
+
+            <!-- Episodes Grid -->
+            <div class="detail-episodes-section">
+              <div class="episodes-header">
+                <div class="episodes-header-left">
+                  <h3>Episodes</h3>
+                  <span class="episodes-count-badge" id="episodesCountBadge">0 Episodes</span>
+                </div>
+                <button class="btn btn-sm btn-batch-header detail-icon-btn" id="btnHeaderDownloadAll" title="Download all episodes" aria-label="Download all episodes">
+                  <i class="fa-solid fa-cloud-arrow-down" aria-hidden="true"></i>
+                </button>
+              </div>
+              <div class="episodes-status-note hidden" id="episodesStatusNote"></div>
+              <div class="episodes-grid" id="episodesGrid">
+                <!-- Buttons injected by JS -->
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- MODAL: BATCH DOWNLOADER -->
+    <div class="modal-overlay hidden" id="modalBatchOverlay">
+      <div class="modal-container modal-batch-container">
+        <div class="batch-header-wrap">
+          <div class="batch-modal-title-wrap">
+            <span class="batch-badge-icon"><i class="fa-solid fa-cloud-arrow-down"></i></span>
+            <div>
+              <h2 class="batch-modal-title">Batch Downloader</h2>
+              <p class="batch-modal-subtitle" id="batchDramaTitle">Drama Title</p>
+            </div>
+          </div>
+          <button class="modal-close-btn" id="btnCloseBatchModal"><i class="fa-solid fa-xmark"></i></button>
+        </div>
+
+        <div class="batch-modal-body">
+          <!-- Drama Info Summary -->
+          <div class="batch-drama-summary">
+            <img id="batchDramaPoster" src="./assets/placeholder_drama.png" class="batch-poster" alt="Poster" />
+            <div class="batch-summary-info">
+              <div class="batch-meta-row">
+                <span class="badge badge-platform" id="batchPlatformBadge">Platform</span>
+                <span class="badge badge-status" id="batchStatusBadge">Ongoing</span>
+              </div>
+              <p class="batch-ep-info" id="batchEpisodesAvailableText">0 Episodes Available to Download</p>
+              <p class="batch-series-note" id="batchSeriesNote"></p>
+            </div>
+          </div>
+
+          <!-- Selection Controls -->
+          <div class="batch-selection-box" id="batchSelectionBox">
+            <label class="batch-section-label">Select Episode Range:</label>
+            <div class="batch-range-row">
+              <div class="batch-range-inputs">
+                <span>From Ep</span>
+                <input type="number" id="batchStartEp" min="1" value="1" class="batch-num-input" />
+                <span>to Ep</span>
+                <input type="number" id="batchEndEp" min="1" value="1" class="batch-num-input" />
+              </div>
+              <button class="btn btn-sm btn-select-all" id="btnBatchSelectAll">
+                <i class="fa-solid fa-check-double"></i> Select All (<span id="batchCountSpan">0</span>)
+              </button>
+            </div>
+            <div class="batch-location-hint">
+              <i class="fa-solid fa-folder-tree"></i> Files will be saved to: <strong>Downloads\AMARA_PRO_DL\[Drama Name]</strong>
+            </div>
+          </div>
+
+          <!-- Live Progress Box (shown while downloading) -->
+          <div class="batch-progress-box hidden" id="batchProgressBox">
+            <div class="batch-progress-header">
+              <span id="batchProgressStatusText"><i class="fa-solid fa-circle-notch fa-spin"></i> Preparing download...</span>
+              <span id="batchProgressPercentText">0%</span>
+            </div>
+            <div class="batch-progress-bar-wrap">
+              <div class="batch-progress-bar-fill" id="batchProgressBarFill" style="width: 0%"></div>
+            </div>
+            <div class="batch-progress-details">
+              <span id="batchCurrentFileText">Episode 1 of 8</span>
+              <span id="batchSaveLocationText">Downloads\AMARA_PRO_DL</span>
+            </div>
+          </div>
+
+          <!-- Completed State -->
+          <div class="batch-completed-box hidden" id="batchCompletedBox">
+            <div class="completed-icon-circle"><i class="fa-solid fa-check"></i></div>
+            <h3>Download Complete!</h3>
+            <p id="batchCompletedSummary">All episodes have been successfully saved to your PC.</p>
+            <button class="btn btn-primary btn-lg" id="btnOpenDownloadsFolder">
+              <i class="fa-solid fa-folder-open"></i> Open in File Explorer
+            </button>
+          </div>
+
+          <!-- Action Buttons -->
+          <div class="batch-modal-actions" id="batchModalActions">
+            <button class="btn btn-batch-download btn-lg" id="btnStartBatchDownload">
+              <i class="fa-solid fa-cloud-arrow-down"></i> Start Download (<span id="batchBtnCount">0</span> Episodes)
+            </button>
+            <button class="btn btn-download btn-lg" id="btnBrowserBatchDownload" title="Download sequentially in browser">
+              <i class="fa-solid fa-globe"></i> Download via Browser
+            </button>
+            <button class="btn btn-secondary btn-lg" id="btnCancelBatchModal">Close</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- MODAL / FULLSCREEN: VIDEO PLAYER -->
+    <div class="player-overlay hidden" id="playerOverlay">
+      <div class="player-container" id="playerContainer">
+
+        <!-- Top Header Overlay -->
+        <div class="player-header-bar">
+          <button class="player-icon-btn" id="btnClosePlayer" title="Close Player">
+            <i class="fa-solid fa-chevron-left"></i>
+          </button>
+          <div class="player-drama-info">
+            <span class="player-drama-title" id="playerDramaTitle">Drama Title</span>
+            <span class="player-episode-title" id="playerEpisodeTitle">Episode 1</span>
+          </div>
+          <div class="player-top-actions">
+            <button class="player-icon-btn" id="btnToggleEpisodeList" title="Episode List">
+              <i class="fa-solid fa-bars-staggered"></i>
+            </button>
+          </div>
+        </div>
+
+        <!-- Video Element -->
+        <div class="video-wrapper" id="videoWrapper">
+          <video id="mainVideoPlayer" preload="auto" playsinline webkit-playsinline></video>
+          
+          <!-- Big Play / Loading indicator -->
+          <div class="video-center-indicator" id="videoCenterIndicator">
+            <div class="spinner-ring" id="videoSpinner"></div>
+            <i class="fa-solid fa-play big-play-icon hidden" id="bigPlayIcon"></i>
+          </div>
+        </div>
+
+        <!-- Video Bottom Controls -->
+        <div class="player-controls-bar" id="playerControlsBar">
+          <!-- Progress bar -->
+          <div class="progress-bar-container" id="progressBarContainer">
+            <div class="progress-buffered" id="progressBuffered"></div>
+            <div class="progress-filled" id="progressFilled"></div>
+            <div class="progress-thumb" id="progressThumb"></div>
+          </div>
+
+          <div class="controls-row">
+            <div class="controls-left">
+              <button class="control-btn" id="btnPlayPause" title="Play / Pause (Space)">
+                <i class="fa-solid fa-play"></i>
+              </button>
+              <button class="control-btn" id="btnPrevEpisode" title="Previous Episode">
+                <i class="fa-solid fa-backward-step"></i>
+              </button>
+              <button class="control-btn" id="btnNextEpisode" title="Next Episode">
+                <i class="fa-solid fa-forward-step"></i>
+              </button>
+              <div class="time-display">
+                <span id="currentTimeText">00:00</span> / <span id="durationTimeText">00:00</span>
+              </div>
+            </div>
+
+            <div class="controls-right">
+              <!-- Download button -->
+              <button class="control-btn btn-download-ctrl" id="btnDownloadPlayer" title="Download Episode (MP4)">
+                <i class="fa-solid fa-download"></i>
+                <span class="control-btn-label">Download</span>
+              </button>
+
+              <!-- Quality selector -->
+              <div class="dropdown-control" id="dropdownQuality">
+                <button class="control-btn" id="btnQuality">
+                  <span id="currentQualityText">1080p</span>
+                </button>
+                <div class="dropdown-menu hidden" id="menuQuality">
+                  <div class="dropdown-item active" data-quality="1080p">1080p (FHD)</div>
+                  <div class="dropdown-item" data-quality="720p">720p (HD)</div>
+                  <div class="dropdown-item" data-quality="540p">540p (SD)</div>
+                </div>
+              </div>
+
+              <!-- Speed selector -->
+              <div class="dropdown-control" id="dropdownSpeed">
+                <button class="control-btn" id="btnSpeed">
+                  <span id="currentSpeedText">1.0x</span>
+                </button>
+                <div class="dropdown-menu hidden" id="menuSpeed">
+                  <div class="dropdown-item" data-speed="0.5">0.5x</div>
+                  <div class="dropdown-item" data-speed="0.75">0.75x</div>
+                  <div class="dropdown-item active" data-speed="1.0">1.0x (Normal)</div>
+                  <div class="dropdown-item" data-speed="1.25">1.25x</div>
+                  <div class="dropdown-item" data-speed="1.5">1.5x</div>
+                  <div class="dropdown-item" data-speed="2.0">2.0x</div>
+                </div>
+              </div>
+
+              <!-- Fullscreen button -->
+              <button class="control-btn" id="btnFullscreen" title="Fullscreen (F)">
+                <i class="fa-solid fa-expand"></i>
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Side Episode Drawer -->
+        <div class="side-drawer hidden" id="episodeDrawer">
+          <div class="drawer-header">
+            <h3>Select Episode</h3>
+            <button class="icon-btn" id="btnCloseEpisodeDrawer">
+              <i class="fa-solid fa-xmark"></i>
+            </button>
+          </div>
+          <div class="drawer-episodes-list" id="drawerEpisodesList">
+            <!-- Injected by JS -->
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- Notification Toast -->
+    <div class="toast-container" id="toastContainer"></div>
+
+  </div>
+
+  <script src="./hls.min.js"></script>
+  <script src="./desktop-bridge.js"></script>
+  <script src="./license-manager.js"></script>
+  <script src="./app.js"></script>
+  <script src="./provider-pagination.js"></script>
+  <script src="./download-status.js"></script>
+  <script src="./desktop.js"></script>
+  <script src="./updates.js"></script>
+</body>
+</html>

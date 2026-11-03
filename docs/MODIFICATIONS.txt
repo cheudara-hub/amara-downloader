@@ -1,0 +1,26 @@
+Hongguo Downloader — English edition
+Modified 2026-10-17
+
+Based on Hongguo Downloader 1.1.0, whose installed notice identifies the
+upstream project as https://github.com/327044572/hongguo-downloader.
+
+Changes: English interface, common genre names, application messages,
+window titles, filename templates, and download folder name; separate
+portable settings directory; local UI verification flag and launcher.
+Added automatic show poster downloads alongside episodes, with format
+detection, shared requests, existing-file reuse, and nonfatal error handling.
+Original Electron runtime, application engine, and FFmpeg are retained.
+
+This modified edition remains licensed under GNU GPL version 3.0.
+Original notices and license files are preserved. The accompanying source
+directory contains the modified application files available from the
+installed archive, including the compiled renderer bundle and dependencies.
+
+2026-11-03: Ported playbackRequest and fetchAppPlayUrl changes, playback-device.js,
+and related offline checks from jackotom/hongguo-drama v5.4 (GPL-3.0).
+Retained existing signing/Spade attribution and AMARA interface. Source archive:
+https://github.com/jackotom/hongguo-drama/archive/refs/tags/v5.4.zip
+
+2026-11-03 batch hotfix: shared bounded renewal wait after rejected playback
+identity; playback deadline propagation; offline concurrent cooldown tests.
+Sequential live regression improved from 3/24 to 24/24 successful model requests.

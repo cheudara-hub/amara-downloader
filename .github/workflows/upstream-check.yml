@@ -1,0 +1,29 @@
+name: Check Hongguo upstream
+on:
+  schedule:
+    - cron: '17 */6 * * *'
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  upstream:
+    runs-on: windows-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Fetch source and prepare compatibility review
+        run: python tools/prepare-upstream.py --skip-checks
+      - name: Summarize upstream version
+        shell: pwsh
+        run: |
+          $latest = Get-Content artifacts/upstream-review/latest-release.json -Raw | ConvertFrom-Json
+          $channel = Get-Content source/update-channel.json -Raw | ConvertFrom-Json
+          "Upstream: $($latest.tag_name). Integrated in AMARA: $($channel.integratedUpstreamVersion)." >> $env:GITHUB_STEP_SUMMARY
+          "Source and a comparison diff are attached for review. Downloaded code was not applied or executed." >> $env:GITHUB_STEP_SUMMARY
+      - uses: actions/upload-artifact@v4
+        with:
+          name: hongguo-upstream-review
+          path: artifacts/upstream-review/
+          retention-days: 14

@@ -1,0 +1,10 @@
+node_modules/
+artifacts/
+backups/
+release/
+english-user-data/
+Hongguo English/
+__pycache__/
+*.log
+.env*
+source/src/pro-config.private.json
